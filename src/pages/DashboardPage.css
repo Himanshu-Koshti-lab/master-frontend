@@ -194,3 +194,83 @@
 .icon-btn:hover {
   color: #2874f0;
 }
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  background: #f9fafc;
+}
+
+.product-info {
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.product-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+}
+
+.product-info p {
+  margin: 0;
+  color: #2874f0;
+  font-weight: 600;
+}
+
+.btn-add {
+  background: #2874f0;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.btn-add:hover {
+  background: #185ec7;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cart-icon {
+  position: relative;
+  cursor: pointer;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #ff5252;
+  color: #fff;
+  font-size: 0.7rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+}
+

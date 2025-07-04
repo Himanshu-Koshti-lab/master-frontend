@@ -1,0 +1,132 @@
+/* === Cart Container === */
+.cart-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.cart-title {
+  color: #2874f0;
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.cart-message {
+  color: #2874f0;
+  font-weight: 500;
+  margin-bottom: 1rem;
+}
+
+.empty-cart {
+  color: #555;
+  font-style: italic;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+/* === Cart Content === */
+.cart-content {
+  margin-top: 1rem;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+}
+
+.cart-table th {
+  background: #2874f0;
+  color: #fff;
+  padding: 14px 20px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.cart-table td {
+  padding: 14px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.cart-table tr:nth-child(even) {
+  background: #f9fafc;
+}
+
+.cart-table tr:hover {
+  background: #e6f0fa;
+}
+
+.cart-table th:first-child {
+  border-top-left-radius: 8px;
+}
+
+.cart-table th:last-child {
+  border-top-right-radius: 8px;
+}
+
+.cart-table tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.cart-table tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+/* === Remove Button === */
+.btn-remove {
+  background: #ff5252;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.btn-remove:hover {
+  background: #e04848;
+}
+
+/* === Cart Summary === */
+.cart-summary {
+  margin-top: 1.5rem;
+  text-align: right;
+}
+
+.summary-line {
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.btn-checkout {
+  background: #fb641b; /* Flipkart bright orange */
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-checkout:hover {
+  background: #d4550f;
+}
+
+/* === Responsive === */
+@media (max-width: 768px) {
+  .cart-container {
+    padding: 1.5rem;
+  }
+  .cart-table td, .cart-table th {
+    padding: 12px;
+  }
+  .cart-summary {
+    text-align: center;
+  }
+}

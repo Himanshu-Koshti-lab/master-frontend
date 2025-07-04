@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { ShoppingBag } from 'lucide-react'; // ✅ Lucide icon here!
+import { useNavigate } from 'react-router-dom';
+import { ShoppingBag } from 'lucide-react'; // Lucide icon
 import API from '../api/axios';
-import './LandingPage.css'; // Import your CSS styles
+import './LandingPage.css';
 
 export default function LandingPage() {
   const [showLogin, setShowLogin] = useState(false);
@@ -11,6 +11,7 @@ export default function LandingPage() {
   const [products, setProducts] = useState([]);
 
   const navigate = useNavigate();
+  const role = localStorage.getItem('role')?.toLowerCase();
 
   const handleLoginOpen = () => setShowLogin(true);
   const handleLoginClose = () => setShowLogin(false);
@@ -46,6 +47,20 @@ export default function LandingPage() {
     }
   };
 
+  const handleAddToCart = async (productId) => {
+    if (role !== 'customer') {
+      alert('Please login as CUSTOMER to add to cart.');
+      return;
+    }
+    try {
+      await API.post('/cart/add', { productId, quantity: 1 });
+      alert('✅ Product added to cart!');
+    } catch (err) {
+      console.error(err);
+      alert('❌ Failed to add to cart.');
+    }
+  };
+
   return (
     <div className="landing-page">
       <header className="landing-header">
@@ -54,7 +69,6 @@ export default function LandingPage() {
       </header>
 
       <main className="landing-content">
-        
         {products.length === 0 ? (
           <p>No products found.</p>
         ) : (
@@ -67,6 +81,14 @@ export default function LandingPage() {
                 <div className="product-info">
                   <h3>{product.name}</h3>
                   <p>${product.price}</p>
+                  {role === 'admin' && (
+                    <button
+                      className="btn-add"
+                      onClick={() => handleAddToCart(product.id)}
+                    >
+                      Add to Cart
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
