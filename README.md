@@ -1,12 +1,86 @@
-# React + Vite
+# 🛒 Master E-Commerce Demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a simple **Spring Boot + React (Vite)** E-Commerce application showcasing:
+- ✅ JWT Authentication
+- ✅ Role-Based Access Control (admin / vendor / customer)
+- ✅ Product Management (add / edit / delete)
+- ✅ Orders for customers & admin
+- ✅ Flipkart / Amazon inspired UI
+- ✅ Lucide React icons
+- ✅ Modern responsive design
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 **Tech Stack**
 
-## Expanding the ESLint configuration
+| Layer         | Tech                                  |
+|---------------|---------------------------------------|
+| Backend       | Java Spring Boot 3, Spring Security   |
+| Auth          | JWT with stateless sessions           |
+| Frontend      | React + Vite, Lucide Icons, Axios     |
+| Styling       | Custom CSS inspired by Flipkart theme |
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🗂️ **Project Structure**
+
+root/
+├── backend/ # Spring Boot project
+├── frontend/ # React Vite app
+| ├── src/
+| | ├── components/ # OrdersPage, ProductsPage, DashboardPage, LandingPage
+| | ├── api/axios.js # Axios instance with base URL
+| ├── public/
+| ├── index.html
+| ├── App.css # Base/global styles
+| ├── LandingPage.css # Landing page styles
+| ├── Dashboard.css # Dashboard styles
+├── README.md
+
+
+  
+---
+
+## 🔐 **Roles**
+
+| Role     | Permissions                                  |
+|----------|----------------------------------------------|
+| `ADMIN`  | View/manage all products & orders            |
+| `VENDOR` | Add/edit products                            |
+| `CUSTOMER` | Place orders, view own orders               |
+
+---
+
+## ✨ **Features**
+
+✅ JWT-based login modal on landing page  
+✅ Sidebar Dashboard with orders/products tabs  
+✅ Customers see **only their orders**  
+✅ Admins/vendors can **add/edit/delete** products  
+✅ Orders & products styled like Flipkart grid/tables  
+✅ Lucide React icons for actions (edit/save/delete)
+
+---
+
+## ⚡ **Getting Started**
+
+### 1️⃣ **Backend**
+
+1. `cd backend/`  
+2. Configure your `application.properties` (DB, JWT secret, CORS)  
+3. Run with:
+   ```bash
+   ./mvnw spring-boot:run
+
+| Endpoint                    | Description                        |
+| --------------------------- | ---------------------------------- |
+| `POST /api/auth/login`      | Login and get JWT                  |
+| `GET /api/products`         | Get all products                   |
+| `POST /api/products`        | Add product (vendor/admin only)    |
+| `PUT /api/products/{id}`    | Update product (vendor/admin only) |
+| `DELETE /api/products/{id}` | Delete product (admin only)        |
+| `GET /api/orders`           | Get all orders (admin only)        |
+| `GET /api/orders/my`        | Get logged-in customer’s orders    |
+| `POST /api/orders`          | Place order (customer only)        |
+
+
