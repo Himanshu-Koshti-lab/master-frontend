@@ -5,6 +5,8 @@ import ProductsPage from './ProductsPage';
 import CartPage from './CartPage';
 import { ShoppingBag, ShoppingCart } from 'lucide-react';
 import API from '../api/axios';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import './DashboardPage.css';
 
 export default function DashboardPage() {
@@ -75,11 +77,11 @@ export default function DashboardPage() {
   const handleAddToCart = async (productId) => {
     try {
       await API.post('/cart/add', { productId, quantity: 1 });
-      alert('✅ Product added to cart!');
+      toast.success('Product added to cart!');
       setCartCount(prev => prev + 1);
     } catch (err) {
       console.error(err);
-      alert('❌ Failed to add to cart.');
+      toast.error('Failed to add to cart.');
     }
   };
 
@@ -90,6 +92,9 @@ export default function DashboardPage() {
 
   return (
     <div className="dashboard-container">
+      {/* ✅ Toast container for all toasts */}
+      <ToastContainer position="top-right" autoClose={2000} />
+
       <header className="dashboard-header">
         <h2>E-Commerce Dashboard</h2>
 
@@ -167,8 +172,13 @@ export default function DashboardPage() {
 
           {activeTab === 'cart' && role === 'customer' && (
             <CartPage
-              onCheckoutSuccess={() => setCartCount(0)}
-              onItemRemoved={() => setCartCount(prev => Math.max(prev - 1, 0))}
+              onCheckoutSuccess={() => {
+                toast.success('Order placed! Cart cleared.');
+                setCartCount(0);
+              }}
+              onItemRemoved={() => {
+                setCartCount(prev => Math.max(prev - 1, 0));
+              }}
             />
           )}
         </main>

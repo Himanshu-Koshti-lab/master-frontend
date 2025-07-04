@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import API from '../api/axios';
+import { toast } from 'react-toastify'; // ✅ Import toast
 import './CartPage.css';
 
 export default function CartPage({ onCheckoutSuccess, onItemRemoved }) {
   const [cart, setCart] = useState(null);
   const [productsMap, setProductsMap] = useState({});
   const [loading, setLoading] = useState(true);
-  const [message, setMessage] = useState('');
 
   useEffect(() => {
     fetchCartAndProducts();
@@ -29,7 +29,7 @@ export default function CartPage({ onCheckoutSuccess, onItemRemoved }) {
       setLoading(false);
     } catch (err) {
       console.error('❌ Failed to load cart or products:', err);
-      setMessage('Failed to load cart.');
+      toast.error('Failed to load cart.');
       setLoading(false);
     }
   };
@@ -37,28 +37,28 @@ export default function CartPage({ onCheckoutSuccess, onItemRemoved }) {
   const handleRemoveItem = async (itemId) => {
     try {
       await API.post(`/cart/remove`, { itemId });
-      alert('✅ Item removed!');
+      toast.success('Item removed from cart!');
       if (onItemRemoved) {
         onItemRemoved();
       }
       fetchCartAndProducts();
     } catch (err) {
       console.error(err);
-      alert('❌ Failed to remove item.');
+      toast.error('Failed to remove item.');
     }
   };
 
   const handleCheckout = async () => {
     try {
       await API.post('/cart/checkout');
-      setMessage('✅ Order placed! Your cart is now empty.');
+      toast.success('✅ Order placed! Your cart is now empty.');
       if (onCheckoutSuccess) {
         onCheckoutSuccess();
       }
       fetchCartAndProducts();
     } catch (err) {
       console.error(err);
-      setMessage('❌ Failed to checkout.');
+      toast.error('❌ Failed to checkout.');
     }
   };
 
@@ -76,8 +76,6 @@ export default function CartPage({ onCheckoutSuccess, onItemRemoved }) {
     <div className="cart-container">
       <h2 className="cart-title">🛒 Your Shopping Cart</h2>
 
-      {message && <p className="cart-message">{message}</p>}
-
       {!cart || cart.items.length === 0 ? (
         <p className="empty-cart">Your cart is empty. Add some products!</p>
       ) : (
@@ -93,59 +91,57 @@ export default function CartPage({ onCheckoutSuccess, onItemRemoved }) {
               </tr>
             </thead>
             <tbody>
-  {cart.items.map((item) => {
-    const product = productsMap[item.productId];
-    const price = product ? product.price : 0;
-    const subtotal = price * item.quantity;
+              {cart.items.map((item) => {
+                const product = productsMap[item.productId];
+                const price = product ? product.price : 0;
+                const subtotal = price * item.quantity;
 
-    const handleUpdateQuantity = async (newQuantity) => {
-      if (newQuantity < 1) {
-        // If qty < 1, remove the item instead
-        handleRemoveItem(item.id);
-        return;
-      }
-      try {
-        const customerId = localStorage.getItem('username');
-        if (!customerId) {
-          alert('❌ Please log in to update your cart.');
-          return;
-        }
-        const existingItem = cart.items.find(i => i.id === item.id);
-        if (existingItem && existingItem.quantity === newQuantity) {
-          // No change in quantity
-          return;
-        }
-        await API.post(`/cart/update?customerId=${customerId}&itemId=${item.id}&quantity=${newQuantity}`);
-        fetchCartAndProducts();
-      } catch (err) {
-        console.error(err);
-        alert('❌ Failed to update quantity.');
-      }
-    };
+                const handleUpdateQuantity = async (newQuantity) => {
+                  if (newQuantity < 1) {
+                    handleRemoveItem(item.id);
+                    return;
+                  }
+                  try {
+                    const customerId = localStorage.getItem('username');
+                    if (!customerId) {
+                      toast.error('Please log in to update your cart.');
+                      return;
+                    }
+                    const existingItem = cart.items.find(i => i.id === item.id);
+                    if (existingItem && existingItem.quantity === newQuantity) {
+                      return; // no change
+                    }
+                    await API.post(`/cart/update?customerId=${customerId}&itemId=${item.id}&quantity=${newQuantity}`);
+                    toast.success('Quantity updated!');
+                    fetchCartAndProducts();
+                  } catch (err) {
+                    console.error(err);
+                    toast.error('❌ Failed to update quantity.');
+                  }
+                };
 
-    return (
-      <tr key={item.id}>
-        <td>{product ? product.name : `ID ${item.productId}`}</td>
-        <td>${price.toFixed(2)}</td>
-        <td>
-          <button onClick={() => handleUpdateQuantity(item.quantity - 1)}>➖</button>
-          <span style={{ margin: '0 8px' }}>{item.quantity}</span>
-          <button onClick={() => handleUpdateQuantity(item.quantity + 1)}>➕</button>
-        </td>
-        <td>${subtotal.toFixed(2)}</td>
-        <td>
-          <button
-            className="btn-remove"
-            onClick={() => handleRemoveItem(item.id)}
-          >
-            Remove
-          </button>
-        </td>
-      </tr>
-    );
-  })}
-</tbody>
-
+                return (
+                  <tr key={item.id}>
+                    <td>{product ? product.name : `ID ${item.productId}`}</td>
+                    <td>${price.toFixed(2)}</td>
+                    <td>
+                      <button onClick={() => handleUpdateQuantity(item.quantity - 1)}>➖</button>
+                      <span style={{ margin: '0 8px' }}>{item.quantity}</span>
+                      <button onClick={() => handleUpdateQuantity(item.quantity + 1)}>➕</button>
+                    </td>
+                    <td>${subtotal.toFixed(2)}</td>
+                    <td>
+                      <button
+                        className="btn-remove"
+                        onClick={() => handleRemoveItem(item.id)}
+                      >
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
           </table>
 
           <div className="cart-summary">
