@@ -1,0 +1,72 @@
+/* ================================================
+  === Base Global Styles ===
+================================================= */
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background-color: #f1f3f6;
+  color: #111;
+}
+
+h1, h2, h3, h4 {
+  margin: 0 0 16px 0;
+}
+
+a {
+  color: #2874f0;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+.error-message {
+  color: #ff5252;
+  font-weight: 500;
+}
+
+.no-data {
+  color: #666;
+  font-style: italic;
+}
+
+.btn-add {
+  background: #2874f0;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background: #185ec7;
+}
+
+.btn-delete {
+  background: #ff5252;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-delete:hover {
+  background: #e04848;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 24px 16px;
+  }
+}

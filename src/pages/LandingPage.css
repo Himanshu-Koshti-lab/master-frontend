@@ -1,0 +1,185 @@
+/* ================================================
+  === Landing Page ===
+================================================= */
+
+.landing-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #2874f0;
+  color: #fff;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.login-button {
+  background: #ffdf00;
+  border: none;
+  color: #111;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.login-button:hover {
+  background: #f4d000;
+}
+
+.landing-content {
+  max-width: 960px;
+  margin: 2rem auto;
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.landing-content h1 {
+  color: #2874f0;
+}
+
+.landing-content h2 {
+  margin-top: 2rem;
+}
+
+.landing-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.landing-content li {
+  margin-bottom: 8px;
+}
+
+.landing-content a {
+  color: #2874f0;
+  font-weight: 500;
+}
+
+.landing-content a:hover {
+  text-decoration: underline;
+}
+
+.note {
+  margin-top: 2rem;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* === Product Grid === */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.product-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  background: #f9fafc;
+}
+
+.product-info {
+  padding: 0.75rem 1rem;
+  text-align: center;
+}
+
+.product-info h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  color: #111;
+}
+
+.product-info p {
+  margin: 0;
+  color: #2874f0;
+  font-weight: 600;
+}
+
+/* === Login Modal === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.login-modal {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.login-modal h2 {
+  margin-top: 0;
+  color: #2874f0;
+}
+
+.login-modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.login-modal input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-login {
+  background: #2874f0;
+  color: #fff;
+  border: none;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.submit-login:hover {
+  background: #185ec7;
+}
+
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
